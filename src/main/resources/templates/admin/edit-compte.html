@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modifier Compte</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+    <div class="container mt-4">
+        <h1>Modifier Compte</h1>
+        <form th:action="@{/admin/comptes/{id}(id=${compte.id})}" th:object="${compte}" method="post">
+            <div class="form-group">
+                <label for="numeroCompte">Numéro de Compte</label>
+                <input type="text" class="form-control" id="numeroCompte" th:field="*{numeroCompte}">
+            </div>
+            <div class="form-group">
+                <label for="solde">Solde</label>
+                <input type="number" class="form-control" id="solde" th:field="*{solde}">
+            </div>
+            <div class="form-group">
+                <label for="client">Client</label>
+                <select class="form-control" id="client" th:field="*{client.id}">
+                    <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.nom} + ' ' + ${client.prenom}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </form>
+    </div>
+</body>
+</html>

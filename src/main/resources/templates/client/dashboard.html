@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard Client</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <nav th:replace="fragments/navbar-client :: navbar"></nav>
+    <div class="container mt-4">
+        <h1>Bienvenue, <span th:text="${client.nom}"></span></h1>
+        <p>Date de création du compte : <span th:text="${client.dateCreation}"></span></p>
+        <p>Solde total : <span th:text="${totalSolde}"></span></p>
+        <h2>Vos Comptes</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Numéro de Compte</th>
+                    <th>Solde</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="compte : ${comptes}">
+                    <td th:text="${compte.numeroCompte}"></td>
+                    <td th:text="${compte.solde}"></td>
+                    <td>
+                        <a class="btn btn-info" th:href="@{/client/transactions/{compteId}(compteId=${compte.id})}">Voir Transactions</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

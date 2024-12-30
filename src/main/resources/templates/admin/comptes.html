@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Comptes</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function deleteCompte(compteId) {
+            Swal.fire({
+                title: 'Êtes-vous sûr?',
+                text: "Cette action est irréversible!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui, supprimer!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/admin/comptes/delete/' + compteId,
+                        type: 'GET',
+                        success: function() {
+                            Swal.fire(
+                                'Supprimé!',
+                                'Le compte a été supprimé.',
+                                'success'
+                            ).then(() => {
+                                location.reload();
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+    <div class="container mt-4">
+        <h1>Comptes</h1>
+        <a class="btn btn-primary" th:href="@{/admin/comptes/new}">Ajouter un Compte</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Numéro de Compte</th>
+                    <th>Solde</th>
+                    <th>Client</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="compte : ${comptes}">
+                    <td th:text="${compte.id}"></td>
+                    <td th:text="${compte.numeroCompte}"></td>
+                    <td th:text="${compte.solde}"></td>
+                    <td th:text="${compte.client.nom} + ' ' + ${compte.client.prenom}"></td>
+                    <td>
+                        <a class="btn btn-warning" th:href="@{/admin/comptes/edit/{id}(id=${compte.id})}">Modifier</a>
+                        <!--<button class="btn btn-danger" onclick="deleteCompte([[${compte.id}]])">Supprimer</button>-->
+						<button class="btn btn-danger" th:attr="onclick='deleteCompte(' + ${compte.id} + ')'">Supprimer</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

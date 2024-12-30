@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Transactions</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <nav th:replace="fragments/navbar-client :: navbar"></nav>
+    <div class="container mt-4">
+        <h1>Transactions pour le Compte <span th:text="${compte.numeroCompte}"></span></h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Montant</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="transaction : ${transactions}">
+                    <td th:text="${transaction.id}"></td>
+                    <td th:text="${transaction.montant}"></td>
+                    <td th:text="${transaction.dateTransaction}"></td>
+                    <td th:text="${transaction.type}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
