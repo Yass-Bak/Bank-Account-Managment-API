@@ -2,44 +2,45 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Modifier une Transaction</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Local Tailwind CSS file -->
+    <link href="/css/output.css" rel="stylesheet">
     <!-- SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body>
-<div class="container mt-5">
-    <h1 class="text-center">Modifier la Transaction</h1>
-    <form th:action="@{/client/transactions/{id}(id=${transaction.id})}" th:object="${transaction}" method="post" class="mt-4">
-        <div class="mb-3">
-            <label for="montant" class="form-label">Montant</label>
-            <input type="text" th:field="*{montant}" class="form-control" id="montant" required>
-        </div>
-      <!-- <div class="mb-3">
-            <label for="date" class="form-label">Date</label>
-            <input type="date" th:field="*{dateTransaction}" class="form-control" id="date" required>
-        </div>-->
-		<div class="mb-3">
-			        <label for="date" class="form-label">Date</label>
-			       <!-- <input type="date" th:field="*{dateTransaction}" class="form-control" id="date" required>-->
-					<input type="datetime-local" id="dateTransaction" th:field="*{dateTransaction}" class="form-control" step="1" />
-			        <span th:if="${#fields.hasErrors('dateTransaction')}" th:errors="*{dateTransaction}"></span>
-			    </div>
-        <div class="mb-3">
-            <label for="type" class="form-label">Type</label>
-            <select th:field="*{type}" class="form-select" id="type" required>
-                <option value="Credit" th:selected="${transaction.type == 'Credit'}">Crédit</option>
-                <option value="Debit" th:selected="${transaction.type == 'Debit'}">Débit</option>
-            </select>
-        </div>
-        <div class="d-flex justify-content-end gap-2">
-            <a href="/client/transactions" class="btn btn-secondary">Annuler</a>
-            <button type="submit" class="btn btn-warning">Modifier</button>
-        </div>
-    </form>
-</div>
+<body class="bg-gray-100">
+	<nav th:replace="fragments/navbar-client :: navbar"></nav>
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-center mb-6">Modifier la Transaction</h1>
+        <form th:action="@{/client/transactions/{id}(id=${transaction.id})}" th:object="${transaction}" method="post" class="bg-white p-6 rounded-lg shadow-md">
+            <!-- Montant Field -->
+            <div class="mb-4">
+                <label for="montant" class="block text-sm font-medium text-gray-700">Montant</label>
+                <input type="text" th:field="*{montant}" id="montant" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                <span th:if="${#fields.hasErrors('montant')}" th:errors="*{montant}" class="text-sm text-red-600"></span>
+            </div>
 
-<!-- Bootstrap Bundle (including Popper.js) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <!-- Date Field -->
+            <div class="mb-4">
+                <label for="dateTransaction" class="block text-sm font-medium text-gray-700">Date</label>
+                <input type="datetime-local" id="dateTransaction" th:field="*{dateTransaction}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" step="1" required>
+                <span th:if="${#fields.hasErrors('dateTransaction')}" th:errors="*{dateTransaction}" class="text-sm text-red-600"></span>
+            </div>
+
+            <!-- Type Field -->
+            <div class="mb-4">
+                <label for="type" class="block text-sm font-medium text-gray-700">Type</label>
+                <select th:field="*{type}" id="type" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                    <option value="Credit" th:selected="${transaction.type == 'Credit'}">Crédit</option>
+                    <option value="Debit" th:selected="${transaction.type == 'Debit'}">Débit</option>
+                </select>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-end gap-2">
+                <a href="/client/transactions" class="bg-red-600 px-4 py-2 rounded-md hover:bg-gray-600 transition duration-300">Annuler</a>
+                <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition duration-300">Modifier</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

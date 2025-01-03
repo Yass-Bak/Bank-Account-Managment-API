@@ -1,23 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Dashboard Admin</title>
     <!-- Correct link to TailwindCSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-
+   <link href="/css/output.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body class="bg-gray-100">
 
+<body class="bg-gray-100">
+    <!-- Include Navbar -->
     <nav th:replace="fragments/navbar :: navbar"></nav>
 
-    <div class="container mx-auto mt-8 px-4 py-6">
-        <h1 class="text-3xl font-bold text-center text-gray-900">Bienvenue sur le Dashboard Admin</h1>
-        <div class="mt-4 text-center">
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center text-gray-900 mb-4">Bienvenue sur le Dashboard Admin</h1>
+        <div class="text-center">
             <p class="text-lg text-gray-700">Gérez vos clients, comptes, et autres fonctionnalités administratives.</p>
         </div>
-    </div>
 
+        <!-- Optional: Add Cards or Quick Links -->
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Clients Card -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <h2 class="text-xl font-semibold text-gray-900 mb-2">Clients</h2>
+                <p class="text-gray-600 mb-4">Gérez les informations des clients.</p>
+                <a th:href="@{/admin/clients}" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                    Voir les Clients
+                </a>
+            </div>
+
+            <!-- Comptes Card -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <h2 class="text-xl font-semibold text-gray-900 mb-2">Comptes</h2>
+                <p class="text-gray-600 mb-4">Gérez les comptes bancaires.</p>
+                <a th:href="@{/admin/comptes}" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                    Voir les Comptes
+                </a>
+            </div>
+
+            <!-- Transactions Card -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <h2 class="text-xl font-semibold text-gray-900 mb-2">Transactions</h2>
+                <p class="text-gray-600 mb-4">Gérez les transactions financières.</p>
+                <a th:href="@{/admin/transactions}" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                    Voir les Transactions
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

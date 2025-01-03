@@ -33,7 +33,7 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable() // If you need to disable CSRF, otherwise remove this line
-				.authorizeRequests().requestMatchers("/login").permitAll() // Allow login to everyone
+				.authorizeRequests().requestMatchers("/login").permitAll().requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // Allow login to everyone
 				.requestMatchers("/admin/**").hasRole("ADMIN") // Only Admins can access /admin/*
 				.requestMatchers("/client/**").hasRole("CLIENT") // Only Clients can access /client/*
 				.anyRequest().authenticated() // Any other request needs authentication

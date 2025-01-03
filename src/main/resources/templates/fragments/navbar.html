@@ -14,14 +14,14 @@
                 </div>
                 <!-- Logo & Centered Menu -->
                 <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                    <a href="#" class="text-2xl font-bold text-gray-900">Gestion Banque</a>
+                    <a class="text-2xl font-bold text-gray-900">Gestion Banque</a>
                 </div>
                 <!-- Desktop Links -->
                 <div class="hidden sm:block sm:ml-6">
                     <div class="flex space-x-4">
                         <a href="#" class="text-gray-900 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium" th:href="@{/admin/clients}">Clients</a>
                         <a href="#" class="text-gray-900 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium" th:href="@{/admin/comptes}">Comptes</a>
-						<a href="#" class="text-gray-900 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium" th:href="@{/admin/transactions}">Transactions</a>
+                       
                     </div>
                 </div>
                 <!-- Logout Button -->
@@ -31,18 +31,19 @@
             </div>
         </div>
 
-        <!-- Mobile Menu (This part is hidden on desktop) -->
-        <div class="sm:hidden" id="mobile-menu">
+        <!-- Mobile Menu (Hidden on desktop) -->
+        <div class="sm:hidden hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1">
                 <a href="#" class="text-gray-900 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium" th:href="@{/admin/clients}">Clients</a>
                 <a href="#" class="text-gray-900 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium" th:href="@{/admin/comptes}">Comptes</a>
+                <a href="#" class="text-gray-900 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium" th:href="@{/admin/transactions}">Transactions</a>
                 <a href="#" class="text-white bg-red-600 block px-3 py-2 rounded-md text-base font-medium" th:href="@{/logout}">Déconnexion</a>
             </div>
         </div>
     </nav>
 </div>
 
-<!-- Tailwind CSS custom classes for better responsiveness -->
+<!-- JavaScript for Mobile Menu Toggle -->
 <script>
     // Toggle mobile menu
     const menuButton = document.querySelector('button[aria-controls="mobile-menu"]');

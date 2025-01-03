@@ -1,30 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Modifier Compte</title>
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <!-- Add Tailwind CSS via CDN (or use your local build) -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
+
+<body class="bg-gray-100">
+    <!-- Include Navbar -->
     <nav th:replace="fragments/navbar :: navbar"></nav>
-    <div class="container mt-4">
-        <h1>Modifier Compte</h1>
-        <form th:action="@{/admin/comptes/{id}(id=${compte.id})}" th:object="${compte}" method="post">
-            <div class="form-group">
-                <label for="numeroCompte">Numéro de Compte</label>
-                <input type="text" class="form-control" id="numeroCompte" th:field="*{numeroCompte}">
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6">Modifier Compte</h1>
+        <form th:action="@{/admin/comptes/{id}(id=${compte.id})}" th:object="${compte}" method="post" class="bg-white p-6 rounded-lg shadow-md">
+            <!-- Numéro de Compte Field -->
+            <div class="mb-4">
+                <label for="numeroCompte" class="block text-sm font-medium text-gray-700">Numéro de Compte</label>
+                <input type="text" id="numeroCompte" th:field="*{numeroCompte}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
             </div>
-            <div class="form-group">
-                <label for="solde">Solde</label>
-                <input type="number" class="form-control" id="solde" th:field="*{solde}">
+
+            <!-- Solde Field -->
+            <div class="mb-4">
+                <label for="solde" class="block text-sm font-medium text-gray-700">Solde</label>
+                <input type="number" id="solde" th:field="*{solde}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
             </div>
-            <div class="form-group">
-                <label for="client">Client</label>
-                <select class="form-control" id="client" th:field="*{client.id}">
+
+            <!-- Client Dropdown -->
+            <div class="mb-6">
+                <label for="client" class="block text-sm font-medium text-gray-700">Client</label>
+                <select id="client" th:field="*{client.id}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                     <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.nom} + ' ' + ${client.prenom}"></option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
+
+            <!-- Submit Button -->
+            <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                Enregistrer
+            </button>
         </form>
     </div>
 </body>
+
 </html>

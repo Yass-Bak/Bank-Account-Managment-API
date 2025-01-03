@@ -2,70 +2,78 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Clients</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script>
-		function deleteClient(clientId) {
-			Swal.fire({
-				title: 'Êtes-vous sûr?',
-				text: "Cette action est irréversible!",
-				icon: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-				cancelButtonColor: '#d33',
-				confirmButtonText: 'Oui, supprimer!'
-			}).then((result) => {
-				if (result.isConfirmed) {
-					$.ajax({
-						url: '/admin/clients/delete/' + clientId,
-						type: 'GET',
-						success: function () {
-							Swal.fire(
-								'Supprimé!',
-								'Le client a été supprimé.',
-								'success'
-							).then(() => {
-								location.reload();
-							});
-						}
-					});
-				}
-			});
-		}
-	</script>
+    <title>Clients</title>
+    <!-- Add Tailwind CSS via CDN (or use your local build) -->
+   <link href="/css/output.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function deleteClient(clientId) {
+            Swal.fire({
+                title: 'Êtes-vous sûr?',
+                text: "Cette action est irréversible!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui, supprimer!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/admin/clients/delete/' + clientId,
+                        type: 'GET',
+                        success: function () {
+                            Swal.fire(
+                                'Supprimé!',
+                                'Le client a été supprimé.',
+                                'success'
+                            ).then(() => {
+                                location.reload();
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    </script>
 </head>
 
-<body>
-	<nav th:replace="fragments/navbar :: navbar"></nav>
-	<div class="container mt-4">
-		<h1>Clients</h1>
-		<a class="btn btn-primary" th:href="@{/admin/clients/new}">Ajouter un Client</a>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Nom</th>
-					<th>Prénom</th>
-					<th>Email</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="client : ${clients}">
-					<td th:text="${client.id}"></td>
-					<td th:text="${client.nom}"></td>
-					<td th:text="${client.prenom}"></td>
-					<td th:text="${client.email}"></td>
-					<td>
-						<a class="btn btn-warning" th:href="@{/admin/clients/edit/{id}(id=${client.id})}">Modifier</a>
-						<button class="btn btn-danger" onclick="deleteClient('${client.id}')">Supprimer</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+<body class="bg-gray-100">
+    <!-- Include Navbar -->
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6">Clients</h1>
+        <a class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300" th:href="@{/admin/clients/new}">Ajouter un Client</a>
+
+        <!-- Table -->
+        <div class="mt-6 overflow-x-auto bg-white shadow-md rounded-lg">
+            <table class="min-w-full">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase">ID</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase">Nom</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase">Prénom</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase">Email</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    <tr th:each="client : ${clients}" class="hover:bg-gray-50">
+                        <td class="px-6 py-4 text-sm text-gray-700" th:text="${client.id}"></td>
+                        <td class="px-6 py-4 text-sm text-gray-700" th:text="${client.nom}"></td>
+                        <td class="px-6 py-4 text-sm text-gray-700" th:text="${client.prenom}"></td>
+                        <td class="px-6 py-4 text-sm text-gray-700" th:text="${client.email}"></td>
+                        <td class="px-6 py-4 text-sm">
+                            <a class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition duration-300" th:href="@{/admin/clients/edit/{id}(id=${client.id})}">Modifier</a>
+                            <button class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition duration-300 ml-2" onclick="deleteClient('${client.id}')">Supprimer</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 
 </html>
