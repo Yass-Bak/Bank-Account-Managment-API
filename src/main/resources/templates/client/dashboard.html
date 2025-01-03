@@ -2,35 +2,50 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Dashboard Client</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <nav th:replace="fragments/navbar-client :: navbar"></nav>
     <div class="container mt-4">
-        <h1>Bienvenue, <span th:text="${client.nom}"></span></h1>
-        <p>Date de création du compte : <span th:text="${client.dateCreation}"></span></p>
-        <p>Solde total : <span th:text="${totalSolde}"></span></p>
-        <h2>Vos Comptes</h2>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Numéro de Compte</th>
-                    <th>Solde</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="compte : ${comptes}">
-                    <td th:text="${compte.numeroCompte}"></td>
-                    <td th:text="${compte.solde}"></td>
-                    <td>
-                        <a class="btn btn-info" th:href="@{/client/transactions/{compteId}(compteId=${compte.id})}">Voir Transactions</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-12 col-md-6">
+                <h1 class="display-4">Bienvenue, <span th:text="${client.nom}"></span></h1>
+                <p class="lead">Date de création du compte : <span th:text="${client.dateCreation}"></span></p>
+            </div>
+            <div class="col-12 col-md-6 text-end">
+                <p><strong>Solde total : </strong><span th:text="${totalSolde}"></span> €</p>
+            </div>
+        </div>
+
+        <!-- Comptes -->
+        <h2 class="my-4">Vos Comptes</h2>
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Numéro de Compte</th>
+                                <th>Solde</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="compte : ${comptes}">
+                                <td th:text="${compte.numeroCompte}"></td>
+                                <td th:text="${compte.solde}"></td>
+                                <td>
+                                    <a class="btn btn-info" th:href="@{/client/transactions/{compteId}(compteId=${compte.id})}">Voir Transactions</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

@@ -14,6 +14,7 @@ public class Compte {
     private Long id;
     private String numeroCompte;
     private Double solde;
+    @Column(nullable = false)
     private LocalDate dateCreation;
 
     @ManyToOne
@@ -22,4 +23,10 @@ public class Compte {
 
     @OneToMany(mappedBy = "compte", cascade = CascadeType.ALL)
     private List<Transaction> transactions;
+    @PrePersist
+    public void prePersist() {
+        if (dateCreation == null) {
+            dateCreation = LocalDate.now();
+        }
+    }
 }

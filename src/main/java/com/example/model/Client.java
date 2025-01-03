@@ -15,8 +15,10 @@ public class Client {
     private String prenom;
     private String email;
     private String motDePasse;
+    @Column(nullable = false)
     private LocalDate dateCreation;
-    private String role;  // Add this line
+    @Column(nullable = false)
+    private String role;  
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Compte> comptes;

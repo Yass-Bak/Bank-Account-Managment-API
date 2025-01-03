@@ -4,6 +4,8 @@ import lombok.Data;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Data
 public class Transaction {
@@ -11,6 +13,8 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double montant;
+    @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
     private LocalDateTime dateTransaction;
     private String type;
 

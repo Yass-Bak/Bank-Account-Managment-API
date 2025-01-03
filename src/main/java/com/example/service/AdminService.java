@@ -12,7 +12,6 @@ import com.example.repository.AdminRepository;
 public class AdminService {
 	@Autowired
     private AdminRepository AdminRepository;
-
 	
 	public Admin saveAdmin(Admin Admin) {
         return AdminRepository.save(Admin);

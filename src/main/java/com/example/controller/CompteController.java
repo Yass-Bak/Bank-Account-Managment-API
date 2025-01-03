@@ -9,6 +9,7 @@ import com.example.model.Compte;
 import com.example.service.ClientService;
 import com.example.service.CompteService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -37,6 +38,7 @@ public class CompteController {
 
     @PostMapping
     public String createCompte(@ModelAttribute("compte") Compte compte) {
+    	compte.setDateCreation(LocalDate.now());
         compteService.saveCompte(compte);
         return "redirect:/admin/comptes";
     }
@@ -52,6 +54,7 @@ public class CompteController {
     @PostMapping("/{id}")
     public String updateCompte(@PathVariable("id") Long id, @ModelAttribute("compte") Compte compte) {
         compte.setId(id);
+        compte.setDateCreation(LocalDate.now());
         compteService.saveCompte(compte);
         return "redirect:/admin/comptes";
     }

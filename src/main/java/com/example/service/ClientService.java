@@ -28,4 +28,8 @@ public class ClientService {
     public void deleteClient(Long id) {
         clientRepository.deleteById(id);
     }
+    public Client getClientByEmail(String email) {
+        return clientRepository.findByEmail(email);
+    }
+
 }

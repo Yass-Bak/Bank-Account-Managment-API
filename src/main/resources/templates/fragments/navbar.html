@@ -1,29 +1,56 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Gestion Banque</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/admin/clients}">Clients</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/admin/comptes}">Comptes</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/logout}">Déconnexion</a>
-                </li>
-            </ul>
+<!-- resources/templates/fragments/navbar.html -->
+<div th:fragment="navbar">
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+            <div class="relative flex items-center justify-between h-16">
+                <!-- Mobile Menu Button -->
+                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Logo & Centered Menu -->
+                <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+                    <a href="#" class="text-2xl font-bold text-gray-900">Gestion Banque</a>
+                </div>
+                <!-- Desktop Links -->
+                <div class="hidden sm:block sm:ml-6">
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-900 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium" th:href="@{/admin/clients}">Clients</a>
+                        <a href="#" class="text-gray-900 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium" th:href="@{/admin/comptes}">Comptes</a>
+						<a href="#" class="text-gray-900 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium" th:href="@{/admin/transactions}">Transactions</a>
+                    </div>
+                </div>
+                <!-- Logout Button -->
+                <div class="hidden sm:block sm:ml-6 ml-auto">
+                    <a href="#" class="bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-red-700" th:href="@{/logout}">Déconnexion</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (This part is hidden on desktop) -->
+        <div class="sm:hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#" class="text-gray-900 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium" th:href="@{/admin/clients}">Clients</a>
+                <a href="#" class="text-gray-900 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium" th:href="@{/admin/comptes}">Comptes</a>
+                <a href="#" class="text-white bg-red-600 block px-3 py-2 rounded-md text-base font-medium" th:href="@{/logout}">Déconnexion</a>
+            </div>
         </div>
     </nav>
-</body>
-</html>
+</div>
+
+<!-- Tailwind CSS custom classes for better responsiveness -->
+<script>
+    // Toggle mobile menu
+    const menuButton = document.querySelector('button[aria-controls="mobile-menu"]');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuButton.addEventListener('click', () => {
+        const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+        menuButton.setAttribute('aria-expanded', !isExpanded);
+        mobileMenu.classList.toggle('hidden');
+    });
+</script>

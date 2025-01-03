@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Créer une Transaction</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Créer une Nouvelle Transaction</h1>
+	<form th:action="@{/client/transactions}" th:object="${transaction}" method="post" class="mt-4">
+	    <div class="mb-3">
+	        <label for="montant" class="form-label">Montant</label>
+	        <input type="text" th:field="*{montant}" class="form-control" id="montant" required>
+	        <span th:if="${#fields.hasErrors('montant')}" th:errors="*{montant}"></span>
+	    </div>
+	    <div class="mb-3">
+	        <label for="date" class="form-label">Date</label>
+	       <!-- <input type="date" th:field="*{dateTransaction}" class="form-control" id="date" required>-->
+			<input type="datetime-local" id="dateTransaction" th:field="*{dateTransaction}" class="form-control" step="1" />
+	        <span th:if="${#fields.hasErrors('dateTransaction')}" th:errors="*{dateTransaction}"></span>
+	    </div>
+	    <div class="mb-3">
+	        <label for="type" class="form-label">Type</label>
+	        <select th:field="*{type}" class="form-select" id="type" required>
+	            <option value="Credit">Crédit</option>
+	            <option value="Debit">Débit</option>
+	        </select>
+	        <span th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></span>
+	    </div>
+		<div class="mb-3">
+		    <label for="compte" class="form-label">Compte</label>
+		    <select th:field="*{compte}" class="form-select" id="compte" required>
+		        <option th:each="compte : ${comptes}" th:value="${compte.id}" th:text="${compte.numeroCompte}"></option>
+		    </select>
+		    <span th:if="${#fields.hasErrors('compte')}" th:errors="*{compte}"></span>
+		</div>
+	    <div class="d-flex justify-content-end gap-2">
+	        <a href="/client/transactions" class="btn btn-secondary">Annuler</a>
+	        <button type="submit" class="btn btn-success">Créer</button>
+	    </div>
+	</form>
+</div>
+
+<!-- Bootstrap Bundle (including Popper.js) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

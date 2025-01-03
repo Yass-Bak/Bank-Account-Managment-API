@@ -28,4 +28,8 @@ public class CompteService {
     public void deleteCompte(Long id) {
         compteRepository.deleteById(id);
     }
+    public List<Compte> getComptesByClientId(Long userId) {
+        
+        return compteRepository.findByClientId(userId);
+    }
 }

@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-</head>
-<body>
+<!-- resources/templates/fragments/navbar.html -->
+<div th:fragment="navbar">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Gestion Banque</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -15,12 +11,12 @@
                     <a class="nav-link" th:href="@{/client/dashboard}">Dashboard</a>
                 </li>
             </ul>
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/logout}">Déconnexion</a>
+                 
+                    <a class="btn btn-danger" th:href="@{/logout}" role="button">Déconnexion</a>
                 </li>
             </ul>
         </div>
     </nav>
-</body>
-</html>
+</div>
